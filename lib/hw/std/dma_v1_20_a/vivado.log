@@ -1,0 +1,57 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Mon Mar  2 00:10:40 2020
+# Process ID: 3522
+# Log file: /home/fbachini/NetFPGA-1G-CML-live/lib/hw/std/pcores/dma_v1_20_a/vivado.log
+# Journal file: /home/fbachini/NetFPGA-1G-CML-live/lib/hw/std/pcores/dma_v1_20_a/vivado.jou
+#-----------------------------------------------------------
+source data/dma_sv_compile.tcl
+# set project_name vivado_work
+# set source_dir hdl/SystemVerilog
+# set netlist_dir netlist 
+# set model_dir  simhdl/verilog
+# set ip_name dma_engine 
+# exec rm -f [glob -nocomplain *.backup.jou]
+# exec rm -f [glob -nocomplain *.backup.log]
+# create_project -force $ip_name $project_name
+# exec mkdir -p $netlist_dir
+# exec mkdir -p $model_dir
+# set_property part xc7k325tffg676-1 [current_project]
+# add_files -scan_for_includes -fileset [current_fileset] \
+#   $source_dir/axi.v \
+#   $source_dir/cfg.v \
+#   $source_dir/dma.v \
+#   $source_dir/iface.v \
+#   $source_dir/lib.v \
+#   $source_dir/mem.v \
+#   $source_dir/pcie_cm_q.v \
+#   $source_dir/pcie_rx_cm.v \
+#   $source_dir/pcie_tx_q.v \
+#   $source_dir/pcie_rx_rd.v \
+#   $source_dir/pcie_tx_rd.v \
+#   $source_dir/rx_ctrl.v \
+#   $source_dir/pcie_rx.v \
+#   $source_dir/pcie_tx.v \
+#   $source_dir/small_async_fifo.v \
+#   $source_dir/pcie_rx_wr.v \
+#   $source_dir/pcie_tx_wr.v \
+#   $source_dir/stats.v \
+#   $source_dir/pcie_rd_q.v \
+#   $source_dir/pcie_tx_cm.v \
+#   $source_dir/pcie_wr_q.v \
+#   $source_dir/tx_ctrl.v
+# set_property file_type SystemVerilog [get_files *.v]
+# synth_design -top dma_engine -no_iobuf
+Command: synth_design -top dma_engine -no_iobuf
+Starting synth_design
+Using part: xc7k325tffg676-1
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7k325t'
+WARNING: [Common 17-348] Failed to get the license for feature 'Synthesis' and/or device 'xc7k325t'
+0 Infos, 1 Warnings, 0 Critical Warnings and 1 Errors encountered.
+synth_design failed
+ERROR: [Common 17-345] A valid license was not found for feature 'Synthesis' and/or device 'xc7k325t'. Please run the Vivado License Manager for assistance in determining
+which features and devices are licensed for your system.
+Resolution: Check the status of your licenses in the Vivado License Manager. For debug help search Xilinx Support for "Licensing FAQ". 
+INFO: [Common 17-206] Exiting Vivado at Mon Mar  2 00:11:31 2020...
