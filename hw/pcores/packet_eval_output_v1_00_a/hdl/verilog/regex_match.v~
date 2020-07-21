@@ -1,0 +1,226 @@
+/*******************************************************************************
+ *
+ *  NetFPGA-10G http://www.netfpga.org
+ *
+ *  File:
+ *        regex_match.v
+ *
+ *  Library:
+ *        std/pcores/nf10_router_output_port_lookup_v1_00_a
+ *
+ *  Module:
+ *        regex_match
+ *
+ *  Author:
+ *        Filipe Bachini
+ *
+ *  Description:
+ *        Uses BRAM to match the packet against regex rules (like Snort, Bro)
+ *
+ *  Copyright notice:
+ *        Copyright (C) 2010, 2011 The Board of Trustees of The Leland Stanford
+ *                                 Junior University
+ *
+ *  Licence:
+ *        This file is part of the NetFPGA 10G development base package.
+ *
+ *        This file is free code: you can redistribute it and/or modify it under
+ *        the terms of the GNU Lesser General Public License version 2.1 as
+ *        published by the Free Software Foundation.
+ *
+ *        This package is distributed in the hope that it will be useful, but
+ *        WITHOUT ANY WARRANTY; without even the implied warranty of
+ *        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *        Lesser General Public License for more details.
+ *
+ *        You should have received a copy of the GNU Lesser General Public
+ *        License along with the NetFPGA source package.  If not, see
+ *        http://www.gnu.org/licenses/.
+ *
+ */
+
+  module regex_match
+    #(parameter C_S_AXIS_DATA_WIDTH=256,
+      parameter LUT_DEPTH = 32,
+      parameter LUT_DEPTH_BITS = log2(LUT_DEPTH)
+      )
+   (// --- Interface to the previous stage
+    input  [C_S_AXIS_DATA_WIDTH-1:0]   tdata,
+
+    // --- Interface to process block
+    output reg                         regex_match_hit,
+
+    // --- Interface to registers
+    //input  [LUT_DEPTH_BITS-1:0]        regex_match_rd_addr,          // address in table to read
+    //input                              regex_match_rd_req,           // request a read
+    //output [31:0]                      regex_match_rd_ip,            // ip to match
+    //output                             regex_match_rd_ack,           // pulses high
+
+    // --- Write port
+    input [14:0]         		 regex_din,
+    input [13:0]                         regex_in_addr,
+
+    // --- Misc
+    input                              reset,
+    input                              clk
+   );
+
+
+   function integer log2;
+      input integer number;
+      begin
+         log2=0;
+         while(2**log2<number) begin
+            log2=log2+1;
+         end
+      end
+   endfunction // log2
+
+   localparam				 RESET = 1;
+   localparam                            WAIT = 2;
+   localparam                            PROCESS = 3;
+   localparam                            WRITE = 4;
+
+   localparam				 CEALING = 255;
+   localparam				 FLOOR = 247;
+
+
+
+   //---------------------- Wires and regs----------------------------
+
+   reg [4:0]                             caracter_mult;
+   reg					 data_vld;
+   reg [12:0]				 stage;
+   reg [13:0]				 next_addr;
+   reg [21:0]				 line;
+   reg [7:0]				 caracter;
+   reg					 WEA;
+
+
+   //reg					 final_stage;
+   reg					 in_ack;
+   reg					 read_ena; 
+   wire	[21:0]				 bram_next_addr;
+   wire [14:0]				 next_stage;
+   reg [13:0]				 din_next;
+
+   reg [1:0]                             state,state_next;
+
+
+
+   //------------------------- Modules-------------------------------
+
+ BRAM2 #(.PIPELINED(1'd0),
+	  .ADDR_WIDTH(32'd14),
+	  .DATA_WIDTH(32'd15),
+	  .MEMSIZE(12'd2048)) 
+  bram(
+	.CLKA	(clk),
+	.CLKB	(clk),
+	.ADDRA	(bram_next_addr[13:0]),
+	.ADDRB	(),
+	.DIA	(regex_din),
+	.DIB	(),
+	.WEA	(WEA),
+	.WEB	(),
+	.ENA	(1'b0),
+	.ENB	(),
+	.DOA	(next_stage),
+	.DOB	()
+	);
+
+   fallthrough_small_fifo #(.WIDTH(22), .MAX_DEPTH_BITS(2))
+      bram_in_addr
+        (.din           (next_addr), 			// Addr in
+         .wr_en         (in_ack),             	        // Write enable
+         .rd_en         (read_ena),                     // Read next addr
+         .dout          (bram_next_addr),
+         .full          (),
+         .nearly_full   (),
+         .prog_full     (),
+         .empty         (empty),
+         .reset         (reset),
+         .clk           (clk)
+         );
+
+   //------------------------- Logic --------------------------------
+
+   //assign data_vld = !empty;
+
+    always @(*) begin
+	WEA <= 0;
+        read_ena = 0;
+	in_ack = 0;
+	state_next = state;	
+
+        case(state)
+		WRITE: begin
+			if (!(regex_in_addr == din_next)) begin
+				WEA <= 1;
+				din_next <= regex_in_addr;
+			end
+		end
+		
+		RESET: begin
+			next_addr <= 13'b0;
+	 		caracter <= tdata[CEALING:FLOOR];
+			caracter_mult = 5'd0;
+			stage <= 12'd0;
+
+			state_next = WAIT;
+
+			end
+
+                WAIT: begin
+                        if(!empty) begin
+                                read_ena = 1;
+                                state_next = PROCESS;
+			end
+			else begin
+				next_addr <= line + caracter;
+				in_ack = 1;
+				state_next = WAIT;
+			end //else
+                   end
+
+                PROCESS: begin
+            		stage <= next_stage[12:0];				// Bram data
+	    		regex_match_hit = next_stage[14];
+
+			caracter <= tdata[CEALING - (caracter_mult * 8)-: 8];	// Next caracter
+
+			line <= stage * 9'd256;					// Next line
+
+			case (caracter_mult)
+				5'd32:
+					caracter_mult = 5'd0;
+				default:
+					caracter_mult = caracter_mult + 1;
+			endcase
+			
+			next_addr <= line + caracter;				// Address ready
+			in_ack = 1;
+
+			state_next = WAIT;
+                end
+        endcase
+     end
+
+
+   always @(posedge clk) begin
+        if(reset)
+                state <= RESET;
+        else begin
+		if((regex_din == 0) && (regex_in_addr == 0)) 
+        		state <= state_next;
+		else begin
+	                state <= WRITE;
+			din_next <= 13'd5;
+		end
+	end
+   end
+
+endmodule // regex_match
+
+
+

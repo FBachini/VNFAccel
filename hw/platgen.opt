@@ -1,0 +1,11 @@
+-p
+xc7k325tffg676-1
+-lang
+verilog
+-intstyle
+default
+-lp
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/lib/
+-msg
+__xps/ise/xmsgprops.lst
+system.mhs

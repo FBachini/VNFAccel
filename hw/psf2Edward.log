@@ -1,0 +1,186 @@
+
+Checking platform configuration ...
+IPNAME: lmb_v10, INSTANCE: microblaze_0_ilmb - 1 master(s) : 1 slave(s) 
+IPNAME: lmb_v10, INSTANCE: microblaze_0_dlmb - 1 master(s) : 1 slave(s) 
+IPNAME: axi_interconnect, INSTANCE: axi_interconnect_0 - 2 master(s) : 16
+slave(s) 
+
+Checking port drivers...
+WARNING:EDK:4180 - PORT: Interrupt_address_in, CONNECTOR: Interrupt_address_in -
+   No driver found. Port will be driven to GND -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_intc_v1_04_a/d
+   ata/axi_intc_v2_1_0.mpd line 131 
+WARNING:EDK:4181 - PORT: util_ds_buf_0_IBUF_DS_P_pin, CONNECTOR:
+   net_util_ds_buf_0_IBUF_DS_P_pin - floating connection -
+   /home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/
+   system.mhs line 61 
+WARNING:EDK:4181 - PORT: Processor_ack_out, CONNECTOR: Processor_ack_out -
+   floating connection -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_intc_v1_04_a/d
+   ata/axi_intc_v2_1_0.mpd line 132 
+WARNING:EDK:4181 - PORT: CLKOUT3, CONNECTOR: clk_125_0000Mhz_90 - floating
+   connection -
+   /home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/
+   system.mhs line 211 
+
+Performing Clock DRCs...
+INFO:EDK - Design contains multiple instances of clock_generator IP, all clock
+   connections should be done by user. XPS Clocking Wizard supports only one
+   instance of clock_generator.
+
+Performing Reset DRCs...
+
+Overriding system level properties...
+INFO:EDK:4130 - IPNAME: axi_intc, INSTANCE:microblaze_0_intc - tcl is overriding
+   PARAMETER C_KIND_OF_INTR value to 0b11111111111111111111111111111101 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_intc_v1_04_a/d
+   ata/axi_intc_v2_1_0.mpd line 87 
+INFO:EDK:4130 - IPNAME: axi_intc, INSTANCE:microblaze_0_intc - tcl is overriding
+   PARAMETER C_KIND_OF_EDGE value to 0b11111111111111111111111111111111 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_intc_v1_04_a/d
+   ata/axi_intc_v2_1_0.mpd line 88 
+INFO:EDK:4130 - IPNAME: axi_intc, INSTANCE:microblaze_0_intc - tcl is overriding
+   PARAMETER C_KIND_OF_LVL value to 0b11111111111111111111111111111111 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_intc_v1_04_a/d
+   ata/axi_intc_v2_1_0.mpd line 89 
+INFO:EDK:4130 - IPNAME: lmb_bram_if_cntlr, INSTANCE:microblaze_0_i_bram_ctrl -
+   tcl is overriding PARAMETER C_MASK value to 0x40000000 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/lmb_bram_if_cntlr_
+   v3_10_c/data/lmb_bram_if_cntlr_v2_1_0.mpd line 92 
+INFO:EDK:4130 - IPNAME: lmb_bram_if_cntlr, INSTANCE:microblaze_0_d_bram_ctrl -
+   tcl is overriding PARAMETER C_MASK value to 0x40000000 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/lmb_bram_if_cntlr_
+   v3_10_c/data/lmb_bram_if_cntlr_v2_1_0.mpd line 92 
+INFO:EDK:4130 - IPNAME: microblaze, INSTANCE:microblaze_0 - tcl is overriding
+   PARAMETER C_D_AXI value to 1 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/microblaze_v8_50_b
+   /data/microblaze_v2_1_0.mpd line 232 
+INFO:EDK:4130 - IPNAME: microblaze, INSTANCE:microblaze_0 - tcl is overriding
+   PARAMETER C_ADDR_TAG_BITS value to 0 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/microblaze_v8_50_b
+   /data/microblaze_v2_1_0.mpd line 337 
+INFO:EDK:4130 - IPNAME: microblaze, INSTANCE:microblaze_0 - tcl is overriding
+   PARAMETER C_DCACHE_ADDR_TAG value to 0 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/microblaze_v8_50_b
+   /data/microblaze_v2_1_0.mpd line 367 
+INFO:EDK:4130 - IPNAME: microblaze, INSTANCE:microblaze_0 - tcl is overriding
+   PARAMETER C_USE_INTERRUPT value to 1 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/microblaze_v8_50_b
+   /data/microblaze_v2_1_0.mpd line 401 
+INFO:EDK:4130 - IPNAME: microblaze, INSTANCE:microblaze_0 - tcl is overriding
+   PARAMETER C_USE_EXT_BRK value to 1 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/microblaze_v8_50_b
+   /data/microblaze_v2_1_0.mpd line 402 
+INFO:EDK:4130 - IPNAME: microblaze, INSTANCE:microblaze_0 - tcl is overriding
+   PARAMETER C_USE_EXT_NM_BRK value to 1 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/microblaze_v8_50_b
+   /data/microblaze_v2_1_0.mpd line 403 
+
+INFO: Setting C_RANGE_CHECK = ON for axi_interconnect axi_interconnect_0.
+INFO:EDK:4130 - IPNAME: axi_interconnect, INSTANCE:axi_interconnect_0 - tcl is
+   overriding PARAMETER C_RANGE_CHECK value to 1 -
+   /opt/Xilinx/14.6/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_interconnect_v
+   1_06_a/data/axi_interconnect_v2_1_0.mpd line 149 
+
+Running system level update procedures...
+
+Running UPDATE Tcl procedures for OPTION SYSLEVEL_UPDATE_PROC...
+
+Running system level DRCs...
+
+Performing System level DRCs on properties...
+
+Running DRC Tcl procedures for OPTION SYSLEVEL_DRC_PROC...
+INTC INFO:: Processor_clk not connected.. IRQ to Microblaze is generated on AXI
+clock.
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/proc_sys_reset_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for proc_sys_reset_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/microblaze_0_intc_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for microblaze_0_intc
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/microblaze_0_ilmb_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for microblaze_0_ilmb
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/microblaze_0_i_bram_ctrl_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   microblaze_0_i_bram_ctrl
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/microblaze_0_dlmb_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for microblaze_0_dlmb
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/microblaze_0_d_bram_ctrl_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   microblaze_0_d_bram_ctrl
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/microblaze_0_bram_block_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   microblaze_0_bram_block
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/microblaze_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for microblaze_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/debug_module_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for debug_module
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/clock_generator_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for clock_generator_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/axi_timebase_wdt_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   axi_timebase_wdt_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/axi_interconnect_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   axi_interconnect_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/rs232_uart_1_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for RS232_Uart_1
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/nf1_cml_interface_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   nf1_cml_interface_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/nf1_cml_interface_1_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   nf1_cml_interface_1
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/nf1_cml_interface_2_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   nf1_cml_interface_2
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/nf1_cml_interface_3_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   nf1_cml_interface_3
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/nf10_bram_output_queues_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   nf10_bram_output_queues_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/nf10_input_arbiter_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   nf10_input_arbiter_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/dma_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for dma_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/clock_generator_1_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for clock_generator_1
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/mdio_ctrl_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for mdio_ctrl_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/axi_gpio_bpi_if_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for axi_gpio_bpi_if
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/axi_hwicap_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for axi_hwicap_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/nf10_identifier_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for nf10_identifier_0
+/home/fbachini/NetFPGA-1G-CML-live/contrib-projects/regex_firewall_output/hw/syn
+thesis/packet_eval_output_0_wrapper_xst.srp not found
+WARNING:EDK:1027 - Device utilization and timing not added for
+   packet_eval_output_0
+Conversion to XML complete.
